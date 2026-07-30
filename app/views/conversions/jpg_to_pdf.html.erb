@@ -1,0 +1,11 @@
+<% content_for :title, t("conversions.jpg_to_pdf.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("conversions.jpg_to_pdf.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("conversions.jpg_to_pdf.description") %></p>
+
+  <%= form_with url: jpg_to_pdf_path, method: :post, multipart: true, class: "mt-8 max-w-xl" do %>
+    <%= render "shared/upload_zone", name: "jpgs[]", multiple: true, sortable: true, accept: "image/jpeg" %>
+    <%= submit_tag t("conversions.jpg_to_pdf.submit"), class: "mt-6 w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>

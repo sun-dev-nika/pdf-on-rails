@@ -1,0 +1,24 @@
+<% content_for :title, t("pdf_operations.compress.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("pdf_operations.compress.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("pdf_operations.compress.description") %></p>
+
+  <%= form_with url: compress_path, method: :post, multipart: true, class: "mt-8 max-w-xl space-y-6" do %>
+    <%= render "shared/upload_zone", name: "pdf", multiple: false, sortable: false %>
+
+    <div>
+      <span class="block text-sm font-medium text-slate-700"><%= t("pdf_operations.compress.quality_label") %></span>
+      <div class="mt-2 flex gap-3">
+        <% [["low", t("pdf_operations.compress.quality_low")], ["medium", t("pdf_operations.compress.quality_medium")], ["high", t("pdf_operations.compress.quality_high")]].each do |value, label| %>
+          <label class="flex items-center gap-2 rounded-md border border-slate-300 px-3 py-2 text-sm has-[:checked]:border-slate-900 has-[:checked]:bg-slate-50">
+            <%= radio_button_tag :quality, value, value == "medium" %>
+            <%= label %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <%= submit_tag t("pdf_operations.compress.submit"), class: "w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>

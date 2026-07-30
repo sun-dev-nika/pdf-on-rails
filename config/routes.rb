@@ -14,6 +14,24 @@ Rails.application.routes.draw do
   get "delete_pages" => "pdf_operations#delete_pages"
   post "delete_pages" => "pdf_operations#delete_pages_file"
 
+  get "compress" => "pdf_operations#compress"
+  post "compress" => "pdf_operations#compress_file"
+
+  get "watermark" => "pdf_operations#watermark"
+  post "watermark" => "pdf_operations#watermark_file"
+
+  get "protect" => "pdf_operations#protect"
+  post "protect" => "pdf_operations#protect_file"
+
+  get "unlock" => "pdf_operations#unlock"
+  post "unlock" => "pdf_operations#unlock_file"
+
+  get "jpg_to_pdf" => "conversions#jpg_to_pdf"
+  post "jpg_to_pdf" => "conversions#jpg_to_pdf_convert"
+
+  get "pdf_to_jpg" => "conversions#pdf_to_jpg"
+  post "pdf_to_jpg" => "conversions#pdf_to_jpg_convert"
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

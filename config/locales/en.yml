@@ -44,12 +44,17 @@ en:
     upload_zone:
       instructions: "Drag your files here or click to browse"
       pdf_only: "PDF files only"
+      jpg_only: "JPG images only"
   pdf_operations:
     nav:
       merge: "Merge PDFs"
       split: "Split PDF"
       rotate: "Rotate pages"
       delete_pages: "Delete pages"
+      compress: "Compress PDF"
+      watermark: "Watermark"
+      protect: "Protect PDF"
+      unlock: "Unlock PDF"
     merge:
       title: "Merge PDFs"
       description: "Upload several PDFs, drag to reorder them, and download the merged result."
@@ -75,6 +80,30 @@ en:
       pages_label: "Pages to delete"
       pages_placeholder: "e.g. 2,4,7-9"
       submit: "Delete and download"
+    compress:
+      title: "Compress PDF"
+      description: "Reduce your PDF's file size by choosing a compression level."
+      quality_label: "Compression level"
+      quality_low: "Low (highest quality)"
+      quality_medium: "Medium (recommended)"
+      quality_high: "High (smallest size)"
+      submit: "Compress and download"
+    watermark:
+      title: "Watermark"
+      description: "Upload a PDF and add a text watermark to every page."
+      text_label: "Watermark text"
+      text_placeholder: "e.g. CONFIDENTIAL"
+      submit: "Apply and download"
+    protect:
+      title: "Protect PDF"
+      description: "Upload a PDF and add a password to it."
+      password_label: "Password"
+      submit: "Protect and download"
+    unlock:
+      title: "Unlock PDF"
+      description: "Upload a protected PDF and its password to remove the protection."
+      password_label: "Current password"
+      submit: "Unlock and download"
     errors:
       no_file: "Upload at least one PDF file."
       need_multiple: "You need to upload at least 2 PDF files to merge them."
@@ -84,8 +113,25 @@ en:
       no_ranges: "Add at least one page range."
       invalid_angle: "The rotation angle must be 90°, 180°, or 270°."
       all_pages_deleted: "You can't delete every page of the document."
+      no_watermark_text: "Enter the watermark text."
+      no_password: "Enter a password."
+      wrong_password: "That password isn't correct."
       range:
         blank: "You didn't specify any pages."
         out_of_range: "Pages %{pages} don't exist (the document has %{total} pages)."
         backwards_range: "The range \"%{range}\" is backwards."
         invalid_token: "\"%{token}\" isn't a valid number or range."
+  conversions:
+    nav:
+      jpg_to_pdf: "JPG to PDF"
+      pdf_to_jpg: "PDF to JPG"
+    jpg_to_pdf:
+      title: "JPG to PDF"
+      description: "Upload one or more JPG images and we'll turn them into a single PDF (one image per page)."
+      submit: "Convert and download"
+    pdf_to_jpg:
+      title: "PDF to JPG"
+      description: "Upload a PDF and we'll convert it into JPG images, one per page."
+      submit: "Convert and download"
+    errors:
+      not_jpg: "\"%{filename}\" is not a valid JPG image."

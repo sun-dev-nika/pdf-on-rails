@@ -15,18 +15,22 @@
   </div>
 </section>
 
-<section class="mx-auto grid max-w-3xl grid-cols-2 gap-4 pb-16 sm:grid-cols-4">
-  <%= link_to merge_path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
-    <span class="block text-sm font-medium text-slate-900"><%= t("pdf_operations.nav.merge") %></span>
-  <% end %>
-  <%= link_to split_path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
-    <span class="block text-sm font-medium text-slate-900"><%= t("pdf_operations.nav.split") %></span>
-  <% end %>
-  <%= link_to rotate_path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
-    <span class="block text-sm font-medium text-slate-900"><%= t("pdf_operations.nav.rotate") %></span>
-  <% end %>
-  <%= link_to delete_pages_path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
-    <span class="block text-sm font-medium text-slate-900"><%= t("pdf_operations.nav.delete_pages") %></span>
+<section class="mx-auto grid max-w-4xl grid-cols-2 gap-4 pb-16 sm:grid-cols-5">
+  <% [
+       [merge_path, t("pdf_operations.nav.merge")],
+       [split_path, t("pdf_operations.nav.split")],
+       [rotate_path, t("pdf_operations.nav.rotate")],
+       [delete_pages_path, t("pdf_operations.nav.delete_pages")],
+       [compress_path, t("pdf_operations.nav.compress")],
+       [watermark_path, t("pdf_operations.nav.watermark")],
+       [protect_path, t("pdf_operations.nav.protect")],
+       [unlock_path, t("pdf_operations.nav.unlock")],
+       [jpg_to_pdf_path, t("conversions.nav.jpg_to_pdf")],
+       [pdf_to_jpg_path, t("conversions.nav.pdf_to_jpg")],
+     ].each do |path, label| %>
+    <%= link_to path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
+      <span class="block text-sm font-medium text-slate-900"><%= label %></span>
+    <% end %>
   <% end %>
 </section>
 

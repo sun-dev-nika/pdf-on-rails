@@ -6,7 +6,7 @@ import { Controller } from "@hotwired/stimulus"
 // dragging their chips (used by the Merge PDFs tool).
 export default class extends Controller {
   static targets = ["input", "list", "dropArea"]
-  static values = { sortable: Boolean }
+  static values = { sortable: Boolean, accept: { type: String, default: "application/pdf" } }
 
   connect() {
     this.selectedFiles = []
@@ -36,7 +36,7 @@ export default class extends Controller {
   }
 
   addFiles(fileList) {
-    const incoming = Array.from(fileList).filter((file) => file.type === "application/pdf")
+    const incoming = Array.from(fileList).filter((file) => file.type === this.acceptValue)
 
     this.selectedFiles = this.inputTarget.multiple ? this.selectedFiles.concat(incoming) : incoming.slice(0, 1)
 

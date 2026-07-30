@@ -1,10 +1,5 @@
-require "marcel"
-
 class PdfOperationsController < ApplicationController
-  MAX_GUEST_SIZE = 20.megabytes
-  MAX_USER_SIZE = 50.megabytes
-
-  class InvalidUpload < StandardError; end
+  include PdfUploadValidation
 
   def merge
   end
@@ -38,7 +33,7 @@ class PdfOperationsController < ApplicationController
     if outputs.size == 1
       send_pdf(outputs.first, "split.pdf")
     else
-      send_zip(outputs, "split.zip")
+      send_zip(outputs, "split.zip", extension: "pdf")
     end
   rescue InvalidUpload => e
     redirect_to split_path, alert: e.message
@@ -93,42 +88,86 @@ class PdfOperationsController < ApplicationController
     redirect_to delete_pages_path, alert: t("pdf_operations.errors.corrupted")
   end
 
+  def compress
+  end
+
+  def compress_file
+    file = params[:pdf]
+    validate_pdfs!(Array(file))
+
+    binary = PdfCompressorService.new(file.tempfile.path, quality: params[:quality].presence || "medium").call
+    send_pdf(binary, "comprimido.pdf")
+  rescue InvalidUpload => e
+    redirect_to compress_path, alert: e.message
+  rescue PdfCompressorService::CompressionFailed
+    redirect_to compress_path, alert: t("pdf_operations.errors.corrupted")
+  end
+
+  def watermark
+  end
+
+  def watermark_file
+    file = params[:pdf]
+    validate_pdfs!(Array(file))
+
+    text = params[:text].to_s.strip
+    raise InvalidUpload, t("pdf_operations.errors.no_watermark_text") if text.blank?
+
+    binary = PdfWatermarkService.new(file.tempfile.path, text: text).call
+    send_pdf(binary, "marca_de_agua.pdf")
+  rescue InvalidUpload => e
+    redirect_to watermark_path, alert: e.message
+  rescue HexaPDF::Error
+    redirect_to watermark_path, alert: t("pdf_operations.errors.corrupted")
+  end
+
+  def protect
+  end
+
+  def protect_file
+    file = params[:pdf]
+    validate_pdfs!(Array(file))
+
+    password = params[:password].to_s
+    raise InvalidUpload, t("pdf_operations.errors.no_password") if password.blank?
+
+    binary = PdfProtectorService.new(file.tempfile.path, password: password).call
+    send_pdf(binary, "protegido.pdf")
+  rescue InvalidUpload => e
+    redirect_to protect_path, alert: e.message
+  rescue PdfProtectorService::EncryptionFailed, HexaPDF::Error
+    redirect_to protect_path, alert: t("pdf_operations.errors.corrupted")
+  end
+
+  def unlock
+  end
+
+  def unlock_file
+    file = params[:pdf]
+    validate_pdfs!(Array(file))
+
+    password = params[:password].to_s
+    raise InvalidUpload, t("pdf_operations.errors.no_password") if password.blank?
+
+    binary = PdfUnlockerService.new(file.tempfile.path, password: password).call
+    send_pdf(binary, "desbloqueado.pdf")
+  rescue InvalidUpload => e
+    redirect_to unlock_path, alert: e.message
+  rescue PdfUnlockerService::WrongPassword
+    redirect_to unlock_path, alert: t("pdf_operations.errors.wrong_password")
+  rescue HexaPDF::Error
+    redirect_to unlock_path, alert: t("pdf_operations.errors.corrupted")
+  end
+
   private
 
-  def send_pdf(binary, filename)
-    send_data binary, filename: filename, type: "application/pdf", disposition: "attachment"
-  end
-
-  def send_zip(binaries, filename)
-    buffer = Zip::OutputStream.write_buffer do |stream|
-      binaries.each_with_index do |binary, index|
-        stream.put_next_entry("parte_#{index + 1}.pdf")
-        stream.write(binary)
-      end
-    end
-    send_data buffer.string, filename: filename, type: "application/zip", disposition: "attachment"
-  end
-
   def validate_pdfs!(files, minimum: 1)
-    raise InvalidUpload, t("pdf_operations.errors.no_file") if files.empty?
-    raise InvalidUpload, t("pdf_operations.errors.need_multiple") if files.size < minimum
-
-    files.each do |file|
-      if file.size > max_upload_size
-        raise InvalidUpload, t("pdf_operations.errors.too_large", limit: max_upload_size / 1.megabyte)
-      end
-      unless pdf?(file)
-        raise InvalidUpload, t("pdf_operations.errors.not_pdf", filename: file.original_filename)
-      end
-    end
-  end
-
-  def pdf?(file)
-    Marcel::MimeType.for(file.tempfile, name: file.original_filename) == "application/pdf"
-  end
-
-  def max_upload_size
-    current_user ? MAX_USER_SIZE : MAX_GUEST_SIZE
+    validate_uploads!(
+      files,
+      content_type: "application/pdf",
+      wrong_type_key: "pdf_operations.errors.not_pdf",
+      minimum: minimum
+    )
   end
 
   def range_error_message(error)

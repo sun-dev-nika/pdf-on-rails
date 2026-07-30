@@ -15,12 +15,17 @@ es:
     upload_zone:
       instructions: "Arrastrá tus archivos acá o hacé clic para elegirlos"
       pdf_only: "Solo archivos PDF"
+      jpg_only: "Solo imágenes JPG"
   pdf_operations:
     nav:
       merge: "Unir PDFs"
       split: "Dividir PDF"
       rotate: "Rotar páginas"
       delete_pages: "Eliminar páginas"
+      compress: "Comprimir PDF"
+      watermark: "Marca de agua"
+      protect: "Proteger PDF"
+      unlock: "Desbloquear PDF"
     merge:
       title: "Unir PDFs"
       description: "Subí varios PDFs, ordenalos arrastrándolos y descargá el resultado unido."
@@ -46,6 +51,30 @@ es:
       pages_label: "Páginas a eliminar"
       pages_placeholder: "ej: 2,4,7-9"
       submit: "Eliminar y descargar"
+    compress:
+      title: "Comprimir PDF"
+      description: "Reducí el tamaño de tu PDF eligiendo el nivel de compresión."
+      quality_label: "Nivel de compresión"
+      quality_low: "Baja (máxima calidad)"
+      quality_medium: "Media (recomendado)"
+      quality_high: "Alta (menor tamaño)"
+      submit: "Comprimir y descargar"
+    watermark:
+      title: "Marca de agua"
+      description: "Subí un PDF y agregá un texto como marca de agua en todas las páginas."
+      text_label: "Texto de la marca de agua"
+      text_placeholder: "ej: CONFIDENCIAL"
+      submit: "Aplicar y descargar"
+    protect:
+      title: "Proteger PDF"
+      description: "Subí un PDF y agregale una contraseña."
+      password_label: "Contraseña"
+      submit: "Proteger y descargar"
+    unlock:
+      title: "Desbloquear PDF"
+      description: "Subí un PDF protegido y su contraseña para quitarle la protección."
+      password_label: "Contraseña actual"
+      submit: "Desbloquear y descargar"
     errors:
       no_file: "Subí al menos un archivo PDF."
       need_multiple: "Necesitás subir al menos 2 archivos PDF para unirlos."
@@ -55,8 +84,25 @@ es:
       no_ranges: "Agregá al menos un rango de páginas."
       invalid_angle: "El ángulo de rotación debe ser 90°, 180° o 270°."
       all_pages_deleted: "No podés eliminar todas las páginas del documento."
+      no_watermark_text: "Escribí el texto de la marca de agua."
+      no_password: "Ingresá una contraseña."
+      wrong_password: "La contraseña no es correcta."
       range:
         blank: "No especificaste ninguna página."
         out_of_range: "Las páginas %{pages} no existen (el documento tiene %{total} páginas)."
         backwards_range: "El rango \"%{range}\" está invertido."
         invalid_token: "\"%{token}\" no es un número ni un rango válido."
+  conversions:
+    nav:
+      jpg_to_pdf: "JPG a PDF"
+      pdf_to_jpg: "PDF a JPG"
+    jpg_to_pdf:
+      title: "JPG a PDF"
+      description: "Subí una o más imágenes JPG y las convertimos en un solo PDF (una imagen por página)."
+      submit: "Convertir y descargar"
+    pdf_to_jpg:
+      title: "PDF a JPG"
+      description: "Subí un PDF y lo convertimos en imágenes JPG, una por página."
+      submit: "Convertir y descargar"
+    errors:
+      not_jpg: "\"%{filename}\" no es una imagen JPG válida."

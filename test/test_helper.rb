@@ -21,5 +21,15 @@ module ActiveSupport
       doc.write(path.to_s, optimize: true)
       path.to_s
     end
+
+    # Rasterizes a throwaway one-page PDF into a real JPEG via Ghostscript,
+    # for exercising the JPG <-> PDF conversion services.
+    def sample_jpg_path
+      pdf_path = blank_pdf_path(1)
+      jpg_path = Rails.root.join("tmp", "test_jpg_#{SecureRandom.hex(6)}.jpg").to_s
+      system("gs", "-dNOPAUSE", "-dBATCH", "-dQUIET", "-sDEVICE=jpeg", "-r72", "-o", jpg_path, pdf_path,
+             exception: true)
+      jpg_path
+    end
   end
 end
