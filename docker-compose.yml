@@ -6,8 +6,11 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-pdf_on_rails_production}
       POSTGRES_USER: ${POSTGRES_USER:-pdf_on_rails}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    # Postgres 18's official image switched to pg_ctlcluster-style,
+    # major-version-specific directories under /var/lib/postgresql itself -
+    # mounting at .../data (the pre-18 convention) makes it refuse to start.
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-pdf_on_rails} -d ${POSTGRES_DB:-pdf_on_rails_production}"]
       interval: 5s

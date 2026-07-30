@@ -1,11 +1,18 @@
 #!/bin/bash -e
 
 # If running the rails server then create or migrate existing database.
-# db:prepare alone doesn't reliably load the queue/cache/cable schemas (seen
-# in development too), so load them explicitly as well - both are idempotent.
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
-  ./bin/rails db:schema:load:queue db:schema:load:cache db:schema:load:cable
+
+  # db:prepare alone doesn't create the queue/cache/cable tables (all four
+  # roles share one physical database here, so checking the primary
+  # connection for one of them tells us about all three). Only load them
+  # when actually missing - db:schema:load uses `force: :cascade` and would
+  # otherwise wipe Solid Queue's job history on every container restart.
+  queue_ready=$(./bin/rails runner 'puts ActiveRecord::Base.connection.table_exists?("solid_queue_jobs")' 2>/dev/null | tail -1)
+  if [ "$queue_ready" != "true" ]; then
+    DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails db:schema:load:queue db:schema:load:cache db:schema:load:cable
+  fi
 fi
 
 exec "${@}"
