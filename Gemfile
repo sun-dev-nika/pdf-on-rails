@@ -20,6 +20,10 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 # Flexible authentication solution [https://github.com/heartcombo/devise]
 gem "devise"
+# Translations for Rails' built-in validation/error messages [https://github.com/svenfuchs/rails-i18n]
+gem "rails-i18n"
+# Spanish (and other locale) translations for Devise's views/messages [https://github.com/tigrish/devise-i18n]
+gem "devise-i18n"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"

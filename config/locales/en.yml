@@ -28,4 +28,15 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  layout:
+    sign_in: "Sign in"
+    sign_up: "Sign up"
+    sign_out: "Sign out"
+  pages:
+    home:
+      headline: "Your PDFs, sorted. No signup required."
+      subheadline: "Merge, split, rotate, and convert your files right in the browser. Upload, process, download — that's it."
+      get_started: "Get started"
+      no_account_needed: "or just start uploading, no account needed"
+      signed_in_as: "Signed in as %{email}"
+      privacy_note: "Your files are processed on our server and automatically deleted shortly after."

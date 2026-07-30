@@ -1,20 +1,19 @@
 <section class="py-24 text-center">
   <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
-    Your PDFs, sorted. No signup required.
+    <%= t("pages.home.headline") %>
   </h1>
   <p class="mx-auto mt-4 max-w-xl text-lg text-slate-600">
-    Merge, split, rotate, compress, and convert your files right in the browser.
-    Upload, process, download — that's it.
+    <%= t("pages.home.subheadline") %>
   </p>
   <div class="mt-8 flex items-center justify-center gap-4">
     <% if user_signed_in? %>
-      <span class="text-slate-600">Signed in as <%= current_user.email %></span>
+      <span class="text-slate-600"><%= t("pages.home.signed_in_as", email: current_user.email) %></span>
     <% else %>
-      <%= link_to "Get started", new_user_registration_path, class: "rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
-      <span class="text-sm text-slate-500">or just start uploading, no account needed</span>
+      <%= link_to t("pages.home.get_started"), new_user_registration_path, class: "rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+      <span class="text-sm text-slate-500"><%= t("pages.home.no_account_needed") %></span>
     <% end %>
   </div>
   <p class="mx-auto mt-10 max-w-md text-xs text-slate-400">
-    Files are processed on our server and automatically deleted shortly after.
+    <%= t("pages.home.privacy_note") %>
   </p>
 </section>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <title><%= content_for(:title) || "Pdf on Rails" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -28,11 +28,16 @@
       <div class="container mx-auto flex items-center justify-between px-5 py-4">
         <%= link_to "Pdf on Rails", root_path, class: "text-lg font-semibold tracking-tight" %>
         <nav class="flex items-center gap-4 text-sm">
+          <div class="flex items-center gap-1 text-slate-400">
+            <%= link_to "ES", url_for(params.to_unsafe_h.merge(locale: "es")), class: "hover:text-slate-900 #{"font-semibold text-slate-900" if I18n.locale == :es}" %>
+            <span>·</span>
+            <%= link_to "EN", url_for(params.to_unsafe_h.merge(locale: "en")), class: "hover:text-slate-900 #{"font-semibold text-slate-900" if I18n.locale == :en}" %>
+          </div>
           <% if user_signed_in? %>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "text-slate-600 hover:text-slate-900" %>
+            <%= button_to t("layout.sign_out"), destroy_user_session_path, method: :delete, class: "text-slate-600 hover:text-slate-900" %>
           <% else %>
-            <%= link_to "Sign in", new_user_session_path, class: "text-slate-600 hover:text-slate-900" %>
-            <%= link_to "Sign up", new_user_registration_path, class: "rounded-md bg-slate-900 px-3 py-1.5 text-white hover:bg-slate-700" %>
+            <%= link_to t("layout.sign_in"), new_user_session_path, class: "text-slate-600 hover:text-slate-900" %>
+            <%= link_to t("layout.sign_up"), new_user_registration_path, class: "rounded-md bg-slate-900 px-3 py-1.5 text-white hover:bg-slate-700" %>
           <% end %>
         </nav>
       </div>

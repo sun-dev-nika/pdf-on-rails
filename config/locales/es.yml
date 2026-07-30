@@ -1,0 +1,13 @@
+es:
+  layout:
+    sign_in: "Iniciar sesión"
+    sign_up: "Registrarse"
+    sign_out: "Cerrar sesión"
+  pages:
+    home:
+      headline: "Tus PDFs, resueltos. Sin necesidad de registrarte."
+      subheadline: "Uní, dividí, rotá y convertí tus archivos directo en el navegador. Subí, procesá, descargá — eso es todo."
+      get_started: "Comenzar"
+      no_account_needed: "o empezá a subir archivos directamente, sin cuenta"
+      signed_in_as: "Sesión iniciada como %{email}"
+      privacy_note: "Tus archivos se procesan en nuestro servidor y se eliminan automáticamente poco después."
