@@ -38,7 +38,11 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     restart: unless-stopped
-    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    # Quick tunnel: no Cloudflare account or domain needed. Prints a random
+    # https://<something>.trycloudflare.com URL to its logs on every start -
+    # run `docker compose logs cloudflared` to find it. The URL changes each
+    # time this container restarts (no stable hostname without a domain).
+    command: tunnel --no-autoupdate --url http://web:80
     depends_on:
       - web
 
