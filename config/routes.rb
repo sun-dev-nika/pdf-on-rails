@@ -32,6 +32,14 @@ Rails.application.routes.draw do
   get "pdf_to_jpg" => "conversions#pdf_to_jpg"
   post "pdf_to_jpg" => "conversions#pdf_to_jpg_convert"
 
+  get "ocr" => "pdf_operations#ocr"
+  post "ocr" => "pdf_operations#ocr_file"
+
+  get "office_to_pdf" => "conversions#office_to_pdf"
+  post "office_to_pdf" => "conversions#office_to_pdf_convert"
+
+  resources :processed_files, only: [ :show ]
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

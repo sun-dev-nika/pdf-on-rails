@@ -41,4 +41,22 @@ module PdfUploadValidation
   def max_upload_size
     current_user ? MAX_USER_SIZE : MAX_GUEST_SIZE
   end
+
+  # Persists the upload as a ProcessedFile for operations that run in a
+  # background job (OCR, Office conversion) instead of the same request.
+  def create_processed_file!(file, operation:)
+    processed_file = ProcessedFile.new(
+      operation: operation,
+      original_filename: file.original_filename,
+      user: current_user,
+      guest_token: current_user ? nil : current_guest_token
+    )
+    processed_file.source_file.attach(
+      io: file.tempfile,
+      filename: file.original_filename,
+      content_type: file.content_type
+    )
+    processed_file.save!
+    processed_file
+  end
 end

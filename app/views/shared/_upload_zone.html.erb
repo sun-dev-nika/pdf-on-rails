@@ -1,5 +1,7 @@
-<%# locals: name:, multiple: false, sortable: false, accept: "application/pdf" %>
+<%# locals: name:, multiple: false, sortable: false, accept: "application/pdf", native_accept: nil, accept_label: nil %>
 <% accept ||= "application/pdf" %>
+<% native_accept ||= accept %>
+<% accept_label ||= (accept == "image/jpeg" ? t("shared.upload_zone.jpg_only") : (accept.blank? ? t("shared.upload_zone.office_formats") : t("shared.upload_zone.pdf_only"))) %>
 <div data-controller="dropzone" data-dropzone-sortable-value="<%= sortable %>" data-dropzone-accept-value="<%= accept %>">
   <div
     data-dropzone-target="dropArea"
@@ -7,10 +9,10 @@
     class="cursor-pointer rounded-xl border-2 border-dashed border-slate-300 px-6 py-12 text-center transition-colors hover:border-slate-400"
   >
     <p class="text-sm text-slate-600"><%= t("shared.upload_zone.instructions") %></p>
-    <p class="mt-1 text-xs text-slate-400"><%= accept == "image/jpeg" ? t("shared.upload_zone.jpg_only") : t("shared.upload_zone.pdf_only") %></p>
+    <p class="mt-1 text-xs text-slate-400"><%= accept_label %></p>
     <%= file_field_tag name,
           multiple: multiple,
-          accept: accept,
+          accept: native_accept,
           data: { dropzone_target: "input", action: "change->dropzone#fileSelected" },
           class: "hidden" %>
   </div>

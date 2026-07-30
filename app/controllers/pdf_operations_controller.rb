@@ -159,6 +159,20 @@ class PdfOperationsController < ApplicationController
     redirect_to unlock_path, alert: t("pdf_operations.errors.corrupted")
   end
 
+  def ocr
+  end
+
+  def ocr_file
+    file = params[:pdf]
+    validate_pdfs!(Array(file))
+
+    processed_file = create_processed_file!(file, operation: "ocr")
+    OcrJob.perform_later(processed_file.id)
+    redirect_to processed_file_path(processed_file)
+  rescue InvalidUpload => e
+    redirect_to ocr_path, alert: e.message
+  end
+
   private
 
   def validate_pdfs!(files, minimum: 1)

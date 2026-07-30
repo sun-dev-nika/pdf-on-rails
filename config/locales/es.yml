@@ -16,6 +16,7 @@ es:
       instructions: "Arrastrá tus archivos acá o hacé clic para elegirlos"
       pdf_only: "Solo archivos PDF"
       jpg_only: "Solo imágenes JPG"
+      office_formats: "Word, Excel, PowerPoint u OpenDocument"
   pdf_operations:
     nav:
       merge: "Unir PDFs"
@@ -26,6 +27,7 @@ es:
       watermark: "Marca de agua"
       protect: "Proteger PDF"
       unlock: "Desbloquear PDF"
+      ocr: "OCR (extraer texto)"
     merge:
       title: "Unir PDFs"
       description: "Subí varios PDFs, ordenalos arrastrándolos y descargá el resultado unido."
@@ -75,6 +77,10 @@ es:
       description: "Subí un PDF protegido y su contraseña para quitarle la protección."
       password_label: "Contraseña actual"
       submit: "Desbloquear y descargar"
+    ocr:
+      title: "OCR (extraer texto)"
+      description: "Subí un PDF escaneado y extraemos el texto que contiene. Puede tardar unos segundos."
+      submit: "Extraer texto"
     errors:
       no_file: "Subí al menos un archivo PDF."
       need_multiple: "Necesitás subir al menos 2 archivos PDF para unirlos."
@@ -96,6 +102,7 @@ es:
     nav:
       jpg_to_pdf: "JPG a PDF"
       pdf_to_jpg: "PDF a JPG"
+      office_to_pdf: "Office a PDF"
     jpg_to_pdf:
       title: "JPG a PDF"
       description: "Subí una o más imágenes JPG y las convertimos en un solo PDF (una imagen por página)."
@@ -104,5 +111,19 @@ es:
       title: "PDF a JPG"
       description: "Subí un PDF y lo convertimos en imágenes JPG, una por página."
       submit: "Convertir y descargar"
+    office_to_pdf:
+      title: "Office a PDF"
+      description: "Subí un documento de Word, Excel, PowerPoint u OpenDocument y lo convertimos a PDF. Puede tardar unos segundos."
+      submit: "Convertir"
     errors:
       not_jpg: "\"%{filename}\" no es una imagen JPG válida."
+      not_office: "\"%{filename}\" no es un formato de Office soportado."
+  processed_files:
+    title: "Procesando archivo"
+    processing: "Procesando tu archivo…"
+    please_wait: "Esto puede tardar unos segundos. Esta página se actualiza sola."
+    done: "¡Listo!"
+    download: "Descargar resultado"
+    failed: "Algo salió mal"
+    errors:
+      not_found: "No encontramos ese archivo, o no te pertenece."

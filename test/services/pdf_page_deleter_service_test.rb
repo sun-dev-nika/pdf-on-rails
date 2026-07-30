@@ -4,7 +4,7 @@ class PdfPageDeleterServiceTest < ActiveSupport::TestCase
   test "removes the requested pages" do
     source = blank_pdf_path(3)
 
-    binary = PdfPageDeleterService.new(source, [2]).call
+    binary = PdfPageDeleterService.new(source, [ 2 ]).call
     doc = HexaPDF::Document.new(io: StringIO.new(binary))
 
     assert_equal 2, doc.pages.count
@@ -14,7 +14,7 @@ class PdfPageDeleterServiceTest < ActiveSupport::TestCase
     source = blank_pdf_path(2)
 
     assert_raises(PdfPageDeleterService::AllPagesDeleted) do
-      PdfPageDeleterService.new(source, [1, 2]).call
+      PdfPageDeleterService.new(source, [ 1, 2 ]).call
     end
   end
 end

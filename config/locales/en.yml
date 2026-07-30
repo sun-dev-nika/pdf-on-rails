@@ -45,6 +45,7 @@ en:
       instructions: "Drag your files here or click to browse"
       pdf_only: "PDF files only"
       jpg_only: "JPG images only"
+      office_formats: "Word, Excel, PowerPoint, or OpenDocument"
   pdf_operations:
     nav:
       merge: "Merge PDFs"
@@ -55,6 +56,7 @@ en:
       watermark: "Watermark"
       protect: "Protect PDF"
       unlock: "Unlock PDF"
+      ocr: "OCR (extract text)"
     merge:
       title: "Merge PDFs"
       description: "Upload several PDFs, drag to reorder them, and download the merged result."
@@ -104,6 +106,10 @@ en:
       description: "Upload a protected PDF and its password to remove the protection."
       password_label: "Current password"
       submit: "Unlock and download"
+    ocr:
+      title: "OCR (extract text)"
+      description: "Upload a scanned PDF and we'll extract its text. This may take a few seconds."
+      submit: "Extract text"
     errors:
       no_file: "Upload at least one PDF file."
       need_multiple: "You need to upload at least 2 PDF files to merge them."
@@ -125,6 +131,7 @@ en:
     nav:
       jpg_to_pdf: "JPG to PDF"
       pdf_to_jpg: "PDF to JPG"
+      office_to_pdf: "Office to PDF"
     jpg_to_pdf:
       title: "JPG to PDF"
       description: "Upload one or more JPG images and we'll turn them into a single PDF (one image per page)."
@@ -133,5 +140,19 @@ en:
       title: "PDF to JPG"
       description: "Upload a PDF and we'll convert it into JPG images, one per page."
       submit: "Convert and download"
+    office_to_pdf:
+      title: "Office to PDF"
+      description: "Upload a Word, Excel, PowerPoint, or OpenDocument file and we'll convert it to PDF. This may take a few seconds."
+      submit: "Convert"
     errors:
       not_jpg: "\"%{filename}\" is not a valid JPG image."
+      not_office: "\"%{filename}\" isn't a supported Office format."
+  processed_files:
+    title: "Processing file"
+    processing: "Processing your file…"
+    please_wait: "This may take a few seconds. This page updates itself."
+    done: "Done!"
+    download: "Download result"
+    failed: "Something went wrong"
+    errors:
+      not_found: "We couldn't find that file, or it isn't yours."

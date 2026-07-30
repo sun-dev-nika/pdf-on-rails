@@ -28,6 +28,8 @@ gem "devise-i18n"
 gem "hexapdf"
 # Build ZIP archives (multi-range Split downloads) [https://github.com/rubyzip/rubyzip]
 gem "rubyzip", require: "zip"
+# Ruby wrapper for the Tesseract OCR engine [https://github.com/dannnylo/rtesseract]
+gem "rtesseract"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"

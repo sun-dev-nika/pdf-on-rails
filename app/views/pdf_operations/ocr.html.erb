@@ -1,0 +1,11 @@
+<% content_for :title, t("pdf_operations.ocr.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("pdf_operations.ocr.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("pdf_operations.ocr.description") %></p>
+
+  <%= form_with url: ocr_path, method: :post, multipart: true, class: "mt-8 max-w-xl" do %>
+    <%= render "shared/upload_zone", name: "pdf", multiple: false, sortable: false %>
+    <%= submit_tag t("pdf_operations.ocr.submit"), class: "mt-6 w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>

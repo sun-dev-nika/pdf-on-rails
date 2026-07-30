@@ -36,7 +36,7 @@ export default class extends Controller {
   }
 
   addFiles(fileList) {
-    const incoming = Array.from(fileList).filter((file) => file.type === this.acceptValue)
+    const incoming = Array.from(fileList).filter((file) => this.acceptValue === "" || file.type === this.acceptValue)
 
     this.selectedFiles = this.inputTarget.multiple ? this.selectedFiles.concat(incoming) : incoming.slice(0, 1)
 

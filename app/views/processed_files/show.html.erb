@@ -1,0 +1,21 @@
+<% content_for :title, t("processed_files.title") %>
+<%= turbo_stream_from @processed_file %>
+
+<section class="mx-auto max-w-xl py-16 text-center">
+  <% if @processed_file.completed? %>
+    <h1 class="text-2xl font-bold text-emerald-700"><%= t("processed_files.done") %></h1>
+    <p class="mt-2 text-slate-600"><%= @processed_file.original_filename %></p>
+    <%= link_to t("processed_files.download"),
+          rails_blob_path(@processed_file.result_file, disposition: "attachment"),
+          class: "mt-6 inline-block rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% elsif @processed_file.failed? %>
+    <h1 class="text-2xl font-bold text-rose-600"><%= t("processed_files.failed") %></h1>
+    <p class="mt-2 text-slate-600"><%= @processed_file.error_message %></p>
+  <% else %>
+    <h1 class="text-2xl font-bold"><%= t("processed_files.processing") %></h1>
+    <p class="mt-2 text-slate-600"><%= t("processed_files.please_wait") %></p>
+    <div class="mt-6 flex justify-center">
+      <div class="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-slate-900"></div>
+    </div>
+  <% end %>
+</section>

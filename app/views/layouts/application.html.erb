@@ -8,6 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
 
     <%= yield :head %>
 

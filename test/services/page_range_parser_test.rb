@@ -2,11 +2,11 @@ require "test_helper"
 
 class PageRangeParserTest < ActiveSupport::TestCase
   test "parses individual pages and ranges" do
-    assert_equal [1, 2, 3, 5], PageRangeParser.parse("1-3, 5", total_pages: 10)
+    assert_equal [ 1, 2, 3, 5 ], PageRangeParser.parse("1-3, 5", total_pages: 10)
   end
 
   test "dedupes and sorts" do
-    assert_equal [1, 2, 3], PageRangeParser.parse("3, 1-2, 2", total_pages: 10)
+    assert_equal [ 1, 2, 3 ], PageRangeParser.parse("3, 1-2, 2", total_pages: 10)
   end
 
   test "raises on blank input" do

@@ -13,7 +13,7 @@ class PdfRotatorServiceTest < ActiveSupport::TestCase
   test "rotates only the requested pages" do
     source = blank_pdf_path(3)
 
-    binary = PdfRotatorService.new(source, angle: 180, pages: [2]).call
+    binary = PdfRotatorService.new(source, angle: 180, pages: [ 2 ]).call
     doc = HexaPDF::Document.new(io: StringIO.new(binary))
 
     assert_equal 0, (doc.pages[0][:Rotate] || 0)

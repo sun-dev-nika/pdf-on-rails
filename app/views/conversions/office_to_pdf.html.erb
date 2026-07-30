@@ -1,0 +1,16 @@
+<% content_for :title, t("conversions.office_to_pdf.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("conversions.office_to_pdf.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("conversions.office_to_pdf.description") %></p>
+
+  <%= form_with url: office_to_pdf_path, method: :post, multipart: true, class: "mt-8 max-w-xl" do %>
+    <%= render "shared/upload_zone",
+          name: "file",
+          multiple: false,
+          sortable: false,
+          accept: "",
+          native_accept: ".doc,.docx,.xls,.xlsx,.ppt,.pptx,.odt,.ods,.odp,.rtf" %>
+    <%= submit_tag t("conversions.office_to_pdf.submit"), class: "mt-6 w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>

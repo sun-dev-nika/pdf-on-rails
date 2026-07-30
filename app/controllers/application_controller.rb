@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
+  helper_method :current_guest_token
+
   private
 
   def set_locale
@@ -15,5 +17,11 @@ class ApplicationController < ActionController::Base
     end
 
     I18n.locale = session[:locale] || I18n.default_locale
+  end
+
+  # Stable per-browser-session identifier for guests, used to own
+  # ProcessedFile records without requiring an account.
+  def current_guest_token
+    session[:guest_token] ||= SecureRandom.uuid
   end
 end
