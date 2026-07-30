@@ -1,0 +1,17 @@
+<% content_for :title, t("pdf_operations.delete_pages.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("pdf_operations.delete_pages.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("pdf_operations.delete_pages.description") %></p>
+
+  <%= form_with url: delete_pages_path, method: :post, multipart: true, class: "mt-8 max-w-xl space-y-6" do %>
+    <%= render "shared/upload_zone", name: "pdf", multiple: false, sortable: false %>
+
+    <div>
+      <label for="pages" class="block text-sm font-medium text-slate-700"><%= t("pdf_operations.delete_pages.pages_label") %></label>
+      <%= text_field_tag :pages, nil, placeholder: t("pdf_operations.delete_pages.pages_placeholder"), required: true, class: "mt-2 w-full rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+    </div>
+
+    <%= submit_tag t("pdf_operations.delete_pages.submit"), class: "w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>

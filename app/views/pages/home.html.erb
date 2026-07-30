@@ -1,4 +1,4 @@
-<section class="py-24 text-center">
+<section class="py-16 text-center">
   <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
     <%= t("pages.home.headline") %>
   </h1>
@@ -13,7 +13,23 @@
       <span class="text-sm text-slate-500"><%= t("pages.home.no_account_needed") %></span>
     <% end %>
   </div>
-  <p class="mx-auto mt-10 max-w-md text-xs text-slate-400">
-    <%= t("pages.home.privacy_note") %>
-  </p>
 </section>
+
+<section class="mx-auto grid max-w-3xl grid-cols-2 gap-4 pb-16 sm:grid-cols-4">
+  <%= link_to merge_path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
+    <span class="block text-sm font-medium text-slate-900"><%= t("pdf_operations.nav.merge") %></span>
+  <% end %>
+  <%= link_to split_path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
+    <span class="block text-sm font-medium text-slate-900"><%= t("pdf_operations.nav.split") %></span>
+  <% end %>
+  <%= link_to rotate_path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
+    <span class="block text-sm font-medium text-slate-900"><%= t("pdf_operations.nav.rotate") %></span>
+  <% end %>
+  <%= link_to delete_pages_path, class: "rounded-xl border border-slate-200 px-4 py-6 text-center hover:border-slate-400 hover:bg-slate-50" do %>
+    <span class="block text-sm font-medium text-slate-900"><%= t("pdf_operations.nav.delete_pages") %></span>
+  <% end %>
+</section>
+
+<p class="mx-auto max-w-md pb-16 text-center text-xs text-slate-400">
+  <%= t("pages.home.privacy_note") %>
+</p>

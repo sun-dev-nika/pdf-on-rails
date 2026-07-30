@@ -40,3 +40,52 @@ en:
       no_account_needed: "or just start uploading, no account needed"
       signed_in_as: "Signed in as %{email}"
       privacy_note: "Your files are processed on our server and automatically deleted shortly after."
+  shared:
+    upload_zone:
+      instructions: "Drag your files here or click to browse"
+      pdf_only: "PDF files only"
+  pdf_operations:
+    nav:
+      merge: "Merge PDFs"
+      split: "Split PDF"
+      rotate: "Rotate pages"
+      delete_pages: "Delete pages"
+    merge:
+      title: "Merge PDFs"
+      description: "Upload several PDFs, drag to reorder them, and download the merged result."
+      submit: "Merge and download"
+    split:
+      title: "Split PDF"
+      description: "Upload a PDF and define one or more page ranges. If you define more than one, you'll get a ZIP with each part."
+      range_label: "Range %{letter}"
+      range_placeholder: "e.g. 1-5"
+      add_range: "Add another range"
+      remove_range: "Remove"
+      submit: "Split and download"
+    rotate:
+      title: "Rotate pages"
+      description: "Upload a PDF and choose how much to rotate it."
+      angle_label: "Angle"
+      pages_label: "Pages (optional, blank = all)"
+      pages_placeholder: "e.g. 1,3,5-7"
+      submit: "Rotate and download"
+    delete_pages:
+      title: "Delete pages"
+      description: "Upload a PDF and specify which pages to remove."
+      pages_label: "Pages to delete"
+      pages_placeholder: "e.g. 2,4,7-9"
+      submit: "Delete and download"
+    errors:
+      no_file: "Upload at least one PDF file."
+      need_multiple: "You need to upload at least 2 PDF files to merge them."
+      too_large: "The file exceeds the %{limit} MB limit."
+      not_pdf: "\"%{filename}\" is not a valid PDF."
+      corrupted: "We couldn't read the file. It may be corrupted or protected."
+      no_ranges: "Add at least one page range."
+      invalid_angle: "The rotation angle must be 90°, 180°, or 270°."
+      all_pages_deleted: "You can't delete every page of the document."
+      range:
+        blank: "You didn't specify any pages."
+        out_of_range: "Pages %{pages} don't exist (the document has %{total} pages)."
+        backwards_range: "The range \"%{range}\" is backwards."
+        invalid_token: "\"%{token}\" isn't a valid number or range."

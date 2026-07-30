@@ -1,0 +1,11 @@
+<% content_for :title, t("pdf_operations.merge.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("pdf_operations.merge.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("pdf_operations.merge.description") %></p>
+
+  <%= form_with url: merge_path, method: :post, multipart: true, class: "mt-8 max-w-xl" do %>
+    <%= render "shared/upload_zone", name: "pdfs[]", multiple: true, sortable: true %>
+    <%= submit_tag t("pdf_operations.merge.submit"), class: "mt-6 w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>

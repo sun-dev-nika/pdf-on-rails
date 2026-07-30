@@ -11,3 +11,52 @@ es:
       no_account_needed: "o empezá a subir archivos directamente, sin cuenta"
       signed_in_as: "Sesión iniciada como %{email}"
       privacy_note: "Tus archivos se procesan en nuestro servidor y se eliminan automáticamente poco después."
+  shared:
+    upload_zone:
+      instructions: "Arrastrá tus archivos acá o hacé clic para elegirlos"
+      pdf_only: "Solo archivos PDF"
+  pdf_operations:
+    nav:
+      merge: "Unir PDFs"
+      split: "Dividir PDF"
+      rotate: "Rotar páginas"
+      delete_pages: "Eliminar páginas"
+    merge:
+      title: "Unir PDFs"
+      description: "Subí varios PDFs, ordenalos arrastrándolos y descargá el resultado unido."
+      submit: "Unir y descargar"
+    split:
+      title: "Dividir PDF"
+      description: "Subí un PDF y definí uno o más rangos de páginas. Si definís más de uno, recibís un ZIP con cada parte."
+      range_label: "Rango %{letter}"
+      range_placeholder: "ej: 1-5"
+      add_range: "Agregar otro rango"
+      remove_range: "Quitar"
+      submit: "Dividir y descargar"
+    rotate:
+      title: "Rotar páginas"
+      description: "Subí un PDF y elegí cuánto rotarlo."
+      angle_label: "Ángulo"
+      pages_label: "Páginas (opcional, vacío = todas)"
+      pages_placeholder: "ej: 1,3,5-7"
+      submit: "Rotar y descargar"
+    delete_pages:
+      title: "Eliminar páginas"
+      description: "Subí un PDF e indicá qué páginas querés quitar."
+      pages_label: "Páginas a eliminar"
+      pages_placeholder: "ej: 2,4,7-9"
+      submit: "Eliminar y descargar"
+    errors:
+      no_file: "Subí al menos un archivo PDF."
+      need_multiple: "Necesitás subir al menos 2 archivos PDF para unirlos."
+      too_large: "El archivo supera el límite de %{limit} MB."
+      not_pdf: "\"%{filename}\" no es un PDF válido."
+      corrupted: "No pudimos leer el archivo. Puede estar dañado o protegido."
+      no_ranges: "Agregá al menos un rango de páginas."
+      invalid_angle: "El ángulo de rotación debe ser 90°, 180° o 270°."
+      all_pages_deleted: "No podés eliminar todas las páginas del documento."
+      range:
+        blank: "No especificaste ninguna página."
+        out_of_range: "Las páginas %{pages} no existen (el documento tiene %{total} páginas)."
+        backwards_range: "El rango \"%{range}\" está invertido."
+        invalid_token: "\"%{token}\" no es un número ni un rango válido."

@@ -11,5 +11,15 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+
+    # Builds a throwaway PDF with the given number of blank pages and
+    # returns its path, for exercising the PDF service objects.
+    def blank_pdf_path(pages)
+      path = Rails.root.join("tmp", "test_pdf_#{SecureRandom.hex(6)}.pdf")
+      doc = HexaPDF::Document.new
+      pages.times { doc.pages.add }
+      doc.write(path.to_s, optimize: true)
+      path.to_s
+    end
   end
 end

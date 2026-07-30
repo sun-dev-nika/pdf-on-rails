@@ -1,0 +1,32 @@
+<% content_for :title, t("pdf_operations.split.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("pdf_operations.split.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("pdf_operations.split.description") %></p>
+
+  <%= form_with url: split_path, method: :post, multipart: true, class: "mt-8 max-w-xl space-y-6" do %>
+    <%= render "shared/upload_zone", name: "pdf", multiple: false, sortable: false %>
+
+    <div data-controller="range-fields">
+      <template data-range-fields-target="template">
+        <div class="range-row mt-2 flex items-center gap-2">
+          <%= text_field_tag "ranges[]", nil, placeholder: t("pdf_operations.split.range_placeholder"), class: "flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+          <button type="button" data-action="range-fields#remove" class="shrink-0 text-slate-400 hover:text-rose-600">×</button>
+        </div>
+      </template>
+
+      <div data-range-fields-target="container">
+        <div class="range-row flex items-center gap-2">
+          <%= text_field_tag "ranges[]", nil, placeholder: t("pdf_operations.split.range_placeholder"), class: "flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+          <button type="button" data-action="range-fields#remove" class="shrink-0 text-slate-400 hover:text-rose-600">×</button>
+        </div>
+      </div>
+
+      <button type="button" data-action="range-fields#add" class="mt-3 text-sm text-slate-600 hover:text-slate-900">
+        + <%= t("pdf_operations.split.add_range") %>
+      </button>
+    </div>
+
+    <%= submit_tag t("pdf_operations.split.submit"), class: "w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>

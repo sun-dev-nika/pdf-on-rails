@@ -1,0 +1,17 @@
+<%# locals: name:, multiple: false, sortable: false %>
+<div data-controller="dropzone" data-dropzone-sortable-value="<%= sortable %>">
+  <div
+    data-dropzone-target="dropArea"
+    data-action="dragover->dropzone#dragOver dragleave->dropzone#dragLeave drop->dropzone#drop click->dropzone#browse"
+    class="cursor-pointer rounded-xl border-2 border-dashed border-slate-300 px-6 py-12 text-center transition-colors hover:border-slate-400"
+  >
+    <p class="text-sm text-slate-600"><%= t("shared.upload_zone.instructions") %></p>
+    <p class="mt-1 text-xs text-slate-400"><%= t("shared.upload_zone.pdf_only") %></p>
+    <%= file_field_tag name,
+          multiple: multiple,
+          accept: "application/pdf",
+          data: { dropzone_target: "input", action: "change->dropzone#fileSelected" },
+          class: "hidden" %>
+  </div>
+  <ul data-dropzone-target="list" class="mt-4 space-y-2"></ul>
+</div>

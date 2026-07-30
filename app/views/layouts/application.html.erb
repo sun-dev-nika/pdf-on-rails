@@ -27,6 +27,12 @@
     <header class="border-b border-slate-200">
       <div class="container mx-auto flex items-center justify-between px-5 py-4">
         <%= link_to "Pdf on Rails", root_path, class: "text-lg font-semibold tracking-tight" %>
+        <nav class="hidden items-center gap-4 text-sm text-slate-600 md:flex">
+          <%= link_to t("pdf_operations.nav.merge"), merge_path, class: "hover:text-slate-900" %>
+          <%= link_to t("pdf_operations.nav.split"), split_path, class: "hover:text-slate-900" %>
+          <%= link_to t("pdf_operations.nav.rotate"), rotate_path, class: "hover:text-slate-900" %>
+          <%= link_to t("pdf_operations.nav.delete_pages"), delete_pages_path, class: "hover:text-slate-900" %>
+        </nav>
         <nav class="flex items-center gap-4 text-sm">
           <div class="flex items-center gap-1 text-slate-400">
             <%= link_to "ES", url_for(params.to_unsafe_h.merge(locale: "es")), class: "hover:text-slate-900 #{"font-semibold text-slate-900" if I18n.locale == :es}" %>

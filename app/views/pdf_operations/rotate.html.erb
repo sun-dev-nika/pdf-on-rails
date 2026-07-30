@@ -1,0 +1,29 @@
+<% content_for :title, t("pdf_operations.rotate.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("pdf_operations.rotate.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("pdf_operations.rotate.description") %></p>
+
+  <%= form_with url: rotate_path, method: :post, multipart: true, class: "mt-8 max-w-xl space-y-6" do %>
+    <%= render "shared/upload_zone", name: "pdf", multiple: false, sortable: false %>
+
+    <div>
+      <span class="block text-sm font-medium text-slate-700"><%= t("pdf_operations.rotate.angle_label") %></span>
+      <div class="mt-2 flex gap-3">
+        <% [90, 180, 270].each do |angle| %>
+          <label class="flex items-center gap-2 rounded-md border border-slate-300 px-3 py-2 text-sm has-[:checked]:border-slate-900 has-[:checked]:bg-slate-50">
+            <%= radio_button_tag :angle, angle, angle == 90 %>
+            <%= angle %>°
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <label for="pages" class="block text-sm font-medium text-slate-700"><%= t("pdf_operations.rotate.pages_label") %></label>
+      <%= text_field_tag :pages, nil, placeholder: t("pdf_operations.rotate.pages_placeholder"), class: "mt-2 w-full rounded-md border border-slate-300 px-3 py-2 text-sm" %>
+    </div>
+
+    <%= submit_tag t("pdf_operations.rotate.submit"), class: "w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>
