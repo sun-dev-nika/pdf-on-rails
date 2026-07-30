@@ -107,18 +107,16 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: pdf_on_rails_production
-    username: pdf_on_rails
-    password: <%= ENV["PDF_ON_RAILS_DATABASE_PASSWORD"] %>
+    database: <%= ENV.fetch("POSTGRES_DB", "pdf_on_rails_production") %>
+    username: <%= ENV.fetch("POSTGRES_USER", "pdf_on_rails") %>
+    password: <%= ENV["POSTGRES_PASSWORD"] %>
+    host: <%= ENV.fetch("POSTGRES_HOST", "db") %>
   cache:
     <<: *primary_production
-    database: pdf_on_rails_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: pdf_on_rails_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: pdf_on_rails_production_cable
     migrations_paths: db/cable_migrate

@@ -1,8 +1,11 @@
 #!/bin/bash -e
 
-# If running the rails server then create or migrate existing database
+# If running the rails server then create or migrate existing database.
+# db:prepare alone doesn't reliably load the queue/cache/cable schemas (seen
+# in development too), so load them explicitly as well - both are idempotent.
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
+  ./bin/rails db:schema:load:queue db:schema:load:cache db:schema:load:cable
 fi
 
 exec "${@}"
