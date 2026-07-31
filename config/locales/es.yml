@@ -3,6 +3,7 @@ es:
     sign_in: "Iniciar sesión"
     sign_up: "Registrarse"
     sign_out: "Cerrar sesión"
+    history: "Mi historial"
   pages:
     home:
       headline: "Tus PDFs, resueltos. Sin necesidad de registrarte."
@@ -28,6 +29,7 @@ es:
       protect: "Proteger PDF"
       unlock: "Desbloquear PDF"
       ocr: "OCR (extraer texto)"
+      organize: "Organizar PDF"
     merge:
       title: "Unir PDFs"
       description: "Subí varios PDFs, ordenalos arrastrándolos y descargá el resultado unido."
@@ -42,20 +44,20 @@ es:
       submit: "Dividir y descargar"
     rotate:
       title: "Rotar páginas"
-      description: "Subí un PDF y elegí cuánto rotarlo."
+      description: "Subí uno o más PDFs y elegí cuánto rotarlos. Si subís varios, recibís un ZIP."
       angle_label: "Ángulo"
       pages_label: "Páginas (opcional, vacío = todas)"
       pages_placeholder: "ej: 1,3,5-7"
       submit: "Rotar y descargar"
     delete_pages:
       title: "Eliminar páginas"
-      description: "Subí un PDF e indicá qué páginas querés quitar."
+      description: "Subí uno o más PDFs e indicá qué páginas querés quitar de cada uno. Si subís varios, recibís un ZIP."
       pages_label: "Páginas a eliminar"
       pages_placeholder: "ej: 2,4,7-9"
       submit: "Eliminar y descargar"
     compress:
       title: "Comprimir PDF"
-      description: "Reducí el tamaño de tu PDF eligiendo el nivel de compresión."
+      description: "Reducí el tamaño de uno o más PDFs eligiendo el nivel de compresión. Si subís varios, recibís un ZIP."
       quality_label: "Nivel de compresión"
       quality_low: "Baja (máxima calidad)"
       quality_medium: "Media (recomendado)"
@@ -63,27 +65,34 @@ es:
       submit: "Comprimir y descargar"
     watermark:
       title: "Marca de agua"
-      description: "Subí un PDF y agregá un texto como marca de agua en todas las páginas."
+      description: "Subí uno o más PDFs y agregá un texto como marca de agua en todas las páginas. Si subís varios, recibís un ZIP."
       text_label: "Texto de la marca de agua"
       text_placeholder: "ej: CONFIDENCIAL"
       submit: "Aplicar y descargar"
     protect:
       title: "Proteger PDF"
-      description: "Subí un PDF y agregale una contraseña."
+      description: "Subí uno o más PDFs y agregales la misma contraseña. Si subís varios, recibís un ZIP."
       password_label: "Contraseña"
       submit: "Proteger y descargar"
     unlock:
       title: "Desbloquear PDF"
-      description: "Subí un PDF protegido y su contraseña para quitarle la protección."
+      description: "Subí uno o más PDFs protegidos con la misma contraseña para quitarles la protección. Si subís varios, recibís un ZIP."
       password_label: "Contraseña actual"
       submit: "Desbloquear y descargar"
     ocr:
       title: "OCR (extraer texto)"
       description: "Subí un PDF escaneado y extraemos el texto que contiene. Puede tardar unos segundos."
       submit: "Extraer texto"
+    organize:
+      title: "Organizar PDF"
+      description: "Subí un PDF, arrastrá las páginas para reordenarlas y descargá el resultado."
+      thumbnails_hint: "Arrastrá las páginas para cambiar su orden."
+      confirm: "Confirmar orden y descargar"
     errors:
       no_file: "Subí al menos un archivo PDF."
       need_multiple: "Necesitás subir al menos 2 archivos PDF para unirlos."
+      too_many_files: "Podés subir como máximo %{limit} archivos a la vez."
+      too_many_pages: "Este PDF tiene demasiadas páginas para organizar (máximo %{limit})."
       too_large: "El archivo supera el límite de %{limit} MB."
       not_pdf: "\"%{filename}\" no es un PDF válido."
       corrupted: "No pudimos leer el archivo. Puede estar dañado o protegido."
@@ -127,3 +136,18 @@ es:
     failed: "Algo salió mal"
     errors:
       not_found: "No encontramos ese archivo, o no te pertenece."
+    index:
+      title: "Mi historial"
+      empty: "Todavía no procesaste ningún archivo."
+      operation: "Operación"
+      file: "Archivo"
+      date: "Fecha"
+      status: "Estado"
+      download: "Descargar"
+      status_completed: "Completado"
+      status_processing: "Procesando"
+      status_pending: "Pendiente"
+      status_failed: "Falló"
+      batch_filename:
+        one: "%{count} archivo"
+        other: "%{count} archivos"

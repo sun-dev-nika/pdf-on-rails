@@ -1,7 +1,12 @@
 class ProcessedFilesController < ApplicationController
-  before_action :set_processed_file
+  before_action :authenticate_user!, only: :index
+  before_action :set_processed_file, only: :show
 
   def show
+  end
+
+  def index
+    @processed_files = current_user.processed_files.with_attached_result_file.order(created_at: :desc)
   end
 
   private

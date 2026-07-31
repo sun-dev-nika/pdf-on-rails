@@ -1,0 +1,16 @@
+<% content_for :title, t("pdf_operations.organize.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("pdf_operations.organize.title") %></h1>
+  <p class="mt-2 text-slate-600"><%= t("pdf_operations.organize.description") %></p>
+
+  <%# Unlike every other tool, this form's response is a new HTML page (the
+      thumbnail/reorder view), not a file download - Turbo would request and
+      expect a turbo_stream response here, which we don't render, so it's
+      turned off for this form to get a normal full-page navigation. %>
+  <%= form_with url: organize_path, method: :post, multipart: true, data: { turbo: false }, class: "mt-8 max-w-xl space-y-6" do %>
+    <%= render "shared/upload_zone", name: "pdf", multiple: false, sortable: false %>
+
+    <%= submit_tag t("pdf_operations.organize.title"), class: "w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
+  <% end %>
+</section>

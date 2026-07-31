@@ -1,0 +1,40 @@
+<% content_for :title, t("processed_files.index.title") %>
+
+<section class="py-12">
+  <h1 class="text-3xl font-bold tracking-tight"><%= t("processed_files.index.title") %></h1>
+
+  <% if @processed_files.empty? %>
+    <p class="mt-6 text-slate-600"><%= t("processed_files.index.empty") %></p>
+  <% else %>
+    <div class="mt-8 overflow-x-auto">
+      <table class="w-full min-w-max text-left text-sm">
+        <thead>
+          <tr class="border-b border-slate-200 text-slate-500">
+            <th class="py-2 pr-4 font-medium"><%= t("processed_files.index.operation") %></th>
+            <th class="py-2 pr-4 font-medium"><%= t("processed_files.index.file") %></th>
+            <th class="py-2 pr-4 font-medium"><%= t("processed_files.index.date") %></th>
+            <th class="py-2 pr-4 font-medium"><%= t("processed_files.index.status") %></th>
+            <th class="py-2 pr-4 font-medium"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @processed_files.each do |processed_file| %>
+            <tr class="border-b border-slate-100">
+              <td class="py-3 pr-4"><%= operation_label(processed_file.operation) %></td>
+              <td class="py-3 pr-4 text-slate-500"><%= processed_file.original_filename %></td>
+              <td class="py-3 pr-4 text-slate-500"><%= l(processed_file.created_at, format: :short) %></td>
+              <td class="py-3 pr-4"><%= t("processed_files.index.status_#{processed_file.status}") %></td>
+              <td class="py-3 pr-4">
+                <% if processed_file.completed? && processed_file.result_file.attached? %>
+                  <%= link_to t("processed_files.index.download"),
+                        rails_blob_path(processed_file.result_file, disposition: "attachment"),
+                        class: "text-slate-900 underline hover:no-underline" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</section>

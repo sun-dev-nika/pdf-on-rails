@@ -38,6 +38,11 @@ Rails.application.routes.draw do
   get "office_to_pdf" => "conversions#office_to_pdf"
   post "office_to_pdf" => "conversions#office_to_pdf_convert"
 
+  get "organize" => "pdf_operations#organize"
+  post "organize" => "pdf_operations#organize_file"
+  patch "organize/:id" => "pdf_operations#organize_apply", as: :organize_apply
+
+  get "history" => "processed_files#index"
   resources :processed_files, only: [ :show ]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

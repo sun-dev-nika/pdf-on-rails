@@ -35,6 +35,7 @@
             <%= link_to "EN", url_for(params.to_unsafe_h.merge(locale: "en")), class: "hover:text-slate-900 #{"font-semibold text-slate-900" if I18n.locale == :en}" %>
           </div>
           <% if user_signed_in? %>
+            <%= link_to t("layout.history"), history_path, class: "text-slate-600 hover:text-slate-900" %>
             <%= button_to t("layout.sign_out"), destroy_user_session_path, method: :delete, class: "text-slate-600 hover:text-slate-900" %>
           <% else %>
             <%= link_to t("layout.sign_in"), new_user_session_path, class: "text-slate-600 hover:text-slate-900" %>
