@@ -101,7 +101,15 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
+          # This app has four database roles (primary/cache/queue/cable) that
+          # all point at the same physical database - DATABASE_URL only ever
+          # merges into "primary", so each other role needs its own
+          # <NAME>_DATABASE_URL or it falls back to a local socket that
+          # doesn't exist on this runner (Postgres is a service container).
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          QUEUE_DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          CACHE_DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          CABLE_DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare test
@@ -142,7 +150,12 @@ jobs:
       - name: Run System Tests
         env:
           RAILS_ENV: test
+          # See the same env block in the `test` job for why all four roles
+          # need their own *_DATABASE_URL here.
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          QUEUE_DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          CACHE_DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          CABLE_DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare test:system
