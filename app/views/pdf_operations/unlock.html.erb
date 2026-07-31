@@ -4,7 +4,8 @@
   <h1 class="text-3xl font-bold tracking-tight"><%= t("pdf_operations.unlock.title") %></h1>
   <p class="mt-2 text-slate-600"><%= t("pdf_operations.unlock.description") %></p>
 
-  <%= form_with url: unlock_path, method: :post, multipart: true, class: "mt-8 max-w-xl space-y-6" do %>
+  <%# turbo: false - avoids Turbo intercepting this file-download form (see merge.html.erb). %>
+  <%= form_with url: unlock_path, method: :post, multipart: true, data: { turbo: false }, class: "mt-8 max-w-xl space-y-6" do %>
     <%= render "shared/upload_zone", name: "pdfs[]", multiple: true, sortable: false %>
 
     <div>

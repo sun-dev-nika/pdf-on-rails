@@ -18,7 +18,8 @@
     <% end %>
   </ul>
 
-  <%= form_with url: organize_apply_path(@processed_file), method: :patch, class: "mt-8 max-w-xl" do %>
+  <%# turbo: false - avoids Turbo intercepting this file-download form (see merge.html.erb). %>
+  <%= form_with url: organize_apply_path(@processed_file), method: :patch, data: { turbo: false }, class: "mt-8 max-w-xl" do %>
     <%= hidden_field_tag :order, (1..@thumbnails.size).to_a.join(","), data: { page_reorder_target: "orderInput" } %>
     <%= submit_tag t("pdf_operations.organize.confirm"), class: "w-full cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-700" %>
   <% end %>
