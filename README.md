@@ -56,7 +56,7 @@ Windows/Docker host, because Rails tooling assumes a Linux/macOS environment.
    ```
    sudo apt-get update
    sudo apt-get install -y build-essential curl git libssl-dev libreadline-dev zlib1g-dev \
-     libyaml-dev libpq-dev postgresql postgresql-contrib \
+     libyaml-dev libpq-dev libvips postgresql postgresql-contrib \
      ghostscript tesseract-ocr tesseract-ocr-spa tesseract-ocr-eng libreoffice
    ```
    (LibreOffice is a large install; grab a coffee.)
