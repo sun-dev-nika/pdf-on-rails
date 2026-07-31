@@ -1,0 +1,49 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "9a5f0d406405835350c1447a3cd417772f1c93a7b0c8b8bf7a2faf6853de7f4d",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/services/pdf_to_jpg_service.rb",
+      "line": 17,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"gs\", \"-dNOPAUSE\", \"-dBATCH\", \"-dQUIET\", \"-sDEVICE=jpeg\", \"-r#{resolution}\", \"-o\", File.join(dir, \"page_%03d.jpg\"), path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PdfToJpgService",
+        "method": "call"
+      },
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "resolution is always a hardcoded Integer literal (150 default, or 300 passed by OcrService) - never user input, so this cannot carry attacker-controlled shell/argv content."
+    },
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "e79347094cefe350dba0f492b14f1c92ba466a6cd1bd2b5e642841be5ce3cb4e",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/services/pdf_compressor_service.rb",
+      "line": 20,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.capture3(\"gs\", \"-sDEVICE=pdfwrite\", \"-dCompatibilityLevel=1.4\", \"-dPDFSETTINGS=#{:BRAKEMAN_SAFE_LITERAL}\", \"-dNOPAUSE\", \"-dBATCH\", \"-dQUIET\", \"-sOutputFile=#{File.join(dir, \"compressed.pdf\")}\", path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PdfCompressorService",
+        "method": "call"
+      },
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": "preset is looked up from the hardcoded QUALITY_PRESETS hash (fetch with a fixed default), so it can only ever be one of three literal values (\"/screen\", \"/ebook\", \"/printer\") - never raw user input."
+    }
+  ],
+  "brakeman_version": "8.0.5"
+}

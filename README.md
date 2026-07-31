@@ -29,9 +29,8 @@ Implemented so far:
   `FileCleanupJob` purges guest files after 30 minutes (registered users keep theirs, since
   "history" is the actual signup incentive)
 
-Not yet implemented: registered-user history UI, Sidekiq-style admin dashboard, and
-deployment config (Docker/Kamal exist from the Rails 8 default but haven't been adapted for
-this app's system dependencies yet — see `prompt_ilovepdf_rails_en.md` for the full spec).
+Not yet implemented: registered-user history UI and a Sidekiq-style admin dashboard for
+Solid Queue. See `prompt_ilovepdf_rails_en.md` for the full spec.
 
 ## Tech stack
 
@@ -89,8 +88,39 @@ Windows/Docker host, because Rails tooling assumes a Linux/macOS environment.
    you come back to a cold WSL session, `sudo service postgresql start` and `bin/dev` (which
    includes the worker) both need to run again.
 
+## Deploying
+
+Self-hosted via Docker Compose (`docker-compose.yml`): a `db` (Postgres 18) container, a
+`web` container (built from `Dockerfile`, runs Puma with the Solid Queue worker/scheduler
+in-process via `SOLID_QUEUE_IN_PUMA=true` — no separate worker container needed at this
+scale), and a `cloudflared` container exposing it to the internet via a Cloudflare quick
+tunnel (no domain or account needed; prints a random public HTTPS URL to its own logs, at
+the cost of that URL changing on every restart — a named tunnel with a stable hostname is
+the upgrade path once a permanent domain is in the picture).
+
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (WSL2 backend).
+2. `copy .env.example .env` and fill in `RAILS_MASTER_KEY` (from `config/master.key`) and a
+   `POSTGRES_PASSWORD`.
+3. `docker compose build && docker compose up -d`, then `docker compose logs cloudflared`
+   for the public URL.
+
+One gotcha worth knowing if you ever touch `docker-compose.yml`: Postgres 18's official
+image switched to mounting its data directory at `/var/lib/postgresql` itself (not
+`.../data`, the pre-18 convention still shown in most examples) — mounting at the old path
+makes the container refuse to start.
+
 ## Running tests
 
 ```
 bin/rails test
+bin/rails test:system
+```
+
+`test:system` needs a real Chrome install (Selenium's Selenium Manager auto-downloads a
+matching chromedriver). On Ubuntu/WSL, install Google Chrome directly rather than the
+`chromium` apt package — that one resolves to a snap, and Chrome-in-a-snap's confinement
+breaks Selenium with `session not created: DevToolsActivePort file doesn't exist`:
+```
+wget -O /tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt-get install -y /tmp/google-chrome.deb
 ```

@@ -31,5 +31,23 @@ module ActiveSupport
              exception: true)
       jpg_path
     end
+
+    # Renders a one-page PDF containing real, OCR-recognizable text.
+    def text_pdf_path(text)
+      path = Rails.root.join("tmp", "test_pdf_#{SecureRandom.hex(6)}.pdf")
+      doc = HexaPDF::Document.new
+      canvas = doc.pages.add.canvas
+      canvas.font("Helvetica", size: 30)
+      canvas.text(text, at: [ 50, 700 ])
+      doc.write(path.to_s, optimize: true)
+      path.to_s
+    end
+
+    # A plain-text file LibreOffice can convert, for Office->PDF tests.
+    def sample_text_document_path
+      path = Rails.root.join("tmp", "test_doc_#{SecureRandom.hex(6)}.txt")
+      File.write(path, "Hello from a test document.\n")
+      path.to_s
+    end
   end
 end

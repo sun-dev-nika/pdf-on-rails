@@ -86,7 +86,9 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev libvips
+        run: |
+          sudo apt-get update && sudo apt-get install --no-install-recommends -y \
+            libpq-dev libvips ghostscript tesseract-ocr tesseract-ocr-spa tesseract-ocr-eng libreoffice
 
       - name: Checkout code
         uses: actions/checkout@v6
@@ -125,7 +127,9 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev libvips
+        run: |
+          sudo apt-get update && sudo apt-get install --no-install-recommends -y \
+            libpq-dev libvips ghostscript tesseract-ocr tesseract-ocr-spa tesseract-ocr-eng libreoffice
 
       - name: Checkout code
         uses: actions/checkout@v6
